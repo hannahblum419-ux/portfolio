@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hannah — UX Research Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --bg: #3E3938;
+      --bg-card: #4a4544;
+      --text: #FFF8EE;
+      --text-secondary: #b8b0a8;
+      --accent: #C46A70;
+      --accent-dim: rgba(65, 138, 255, 0.12);
+      --olive: #A3A068;
+      --border: rgba(255, 248, 238, 0.1);
+    }
+ 
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+ 
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 4rem;
+      background: rgba(62, 57, 56, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+ 
+    .nav-logo {
+      font-family: 'Gloock', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+ 
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+ 
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+ 
+    .nav-links a:hover { color: var(--text); }
+ 
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+ 
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 2rem;
+    }
+ 
+    .hero h1 {
+      font-family: 'Gloock', serif;
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+      max-width: 22ch;
+    }
+ 
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+ 
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 52ch;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+ 
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+ 
+    .hero-cta:hover { color: var(--accent); }
+ 
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 4rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+ 
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--text-secondary);
+    }
+ 
+    /* SECTION WRAPPER */
+    .section {
+      padding: 7rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+ 
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+ 
+    .section-label::after {
+      content: '';
+      display: block;
+      flex: 1;
+      max-width: 3rem;
+      height: 1px;
+      background: var(--olive);
+      opacity: 0.5;
+    }
+ 
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+ 
+    .about-grid h2 {
+      font-family: 'Gloock', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      grid-column: 1 / -1;
+    }
+ 
+    .about-grid h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+ 
+    .about-body {
+      color: var(--text-secondary);
+      line-height: 1.85;
+    }
+ 
+    .about-body p + p { margin-top: 1.25rem; }
+ 
+    .about-details { display: flex; flex-direction: column; gap: 2rem; }
+ 
+ 
+    .detail-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 0.6rem;
+    }
+ 
+    .detail-block p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+ 
+    /* CASE STUDIES */
+    .case-studies { border-top: 1px solid var(--border); }
+ 
+    .case-grid {
+      display: flex;
+      flex-direction: column;
+    }
+ 
+    .case-card {
+      background: transparent;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+ 
+    .case-card:first-child { border-top: 1px solid var(--border); }
+    .case-card:hover { background: var(--bg-card); }
+    .case-card.open { background: var(--bg-card); }
+ 
+    .case-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.75rem 2rem;
+      user-select: none;
+    }
+ 
+    .case-header-left {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+ 
+    .case-client {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      line-height: 1.15;
+    }
+ 
+    .case-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--olive);
+    }
+ 
+    .case-title-preview {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-top: 0.4rem;
+    }
+ 
+    .case-expand-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      opacity: 0.4;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: opacity 0.2s, color 0.2s;
+    }
+ 
+    .case-card:hover .case-expand-indicator,
+    .case-card.open .case-expand-indicator {
+      opacity: 1;
+      color: var(--accent);
+    }
+ 
+    .expand-icon {
+      width: 18px;
+      height: 18px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      position: relative;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+ 
+    .expand-icon::before,
+    .expand-icon::after {
+      content: '';
+      position: absolute;
+      background: currentColor;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+ 
+    .expand-icon::before {
+      width: 8px; height: 1px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+ 
+    .expand-icon::after {
+      width: 1px; height: 8px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+ 
+    .case-card.open .expand-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+ 
+    .case-detail {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+ 
+    .case-card.open .case-detail {
+      grid-template-rows: 1fr;
+    }
+ 
+    .case-detail-inner { overflow: hidden; }
+ 
+    .case-detail-content {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 3rem;
+      padding: 2rem 2rem 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+ 
+    .case-body {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+ 
+    .case-body + .case-body { margin-top: 1rem; }
+ 
+    .case-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+ 
+    .meta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+ 
+    .meta-key {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--olive);
+      opacity: 0.9;
+    }
+ 
+    .meta-val {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+ 
+    @media (max-width: 700px) {
+      .case-header { padding: 1.5rem 0; }
+      .case-detail-content { grid-template-columns: 1fr; padding: 1.5rem 0 2rem; }
+      .case-header-left { gap: 0.75rem; flex-direction: column; align-items: flex-start; }
+    }
+ 
+    /* METHODS */
+    .methods-section { border-top: 1px solid var(--border); }
+ 
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem 6rem;
+    }
+ 
+    .method-group-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 1.25rem;
+    }
+ 
+    .method-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+ 
+    .method-list li {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      padding-left: 1rem;
+      position: relative;
+    }
+ 
+    .method-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--olive);
+      opacity: 0.7;
+    }
+ 
+    /* CONTACT */
+    .contact-section {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
+ 
+    .contact-section h2 {
+      font-family: 'Gloock', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+ 
+    .contact-section h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+ 
+    .contact-section p {
+      color: var(--text-secondary);
+      max-width: 44ch;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+ 
+    .contact-links {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+ 
+    .contact-link {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+ 
+    .contact-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+ 
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+ 
+    footer p {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      opacity: 0.5;
+    }
+ 
+    /* DIVIDER */
+    .full-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+ 
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 2rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7rem 2rem 5rem; }
+      .section { padding: 5rem 2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .methods-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { padding: 2rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+ 
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Hannah Blum</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#methods">Methods</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div style="position: relative;">
+    <section class="hero">
+      <p class="hero-eyebrow">UX Research &amp; Strategy</p>
+      <h1>Exploring the intersection of people, systems, and strategy — <em>a human-centered approach</em> to organizational challenges</h1>
+      <p class="hero-sub">
+        I connect human detail and organizational big picture — turning what people actually experience into research that teams can act on and strategy that holds up in the real world.
+      </p>
+      <a href="#work" class="hero-cta">View case studies →</a>
+    </section>
+    <p class="hero-scroll">Scroll to explore</p>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <h2>Strategy by training. <em>Empathy</em> by practice.</h2>
+      <div class="about-body">
+        <p>
+          The thread running through every engagement is a belief that the best decisions start with people: their experiences, frustrations, and ideas. I find meaning in taking something imperfect and human — interviews that run long because someone finally feels heard, surveys full of unfiltered truth, processes mapped across dozens of people — and translating it into something a team can act on.
+        </p>
+        <p>
+          I have a background in human-computer interaction and strategy consulting across healthcare, arts, and enterprise operations. I'm drawn to projects where strategy isn't just about growth — it's about preserving and advancing a mission and values that matter.
+        </p>
+      </div>
+      <div class="about-details">
+        <div class="detail-block">
+          <p class="detail-label">Education</p>
+          <p>M.S. Human-Computer Interaction — DePaul University<br/>B.S. Information Systems &amp; Decision Sciences — LSU</p>
+        </div>
+        <div class="detail-block">
+          <p class="detail-label">Current Role</p>
+          <p>Design Research Associate, LaFargue</p>
+        </div>
+        <div class="detail-block">
+          <p class="detail-label">Sectors</p>
+          <p>Arts &amp; Culture · Healthcare · Real Estate · Nonprofit</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="full-divider" />
+
+  <!-- CASE STUDIES -->
+  <section class="section case-studies" id="work">
+    <p class="section-label">Selected Work</p>
+    <div class="case-grid">
+
+      <!-- CASE 1: Arts Org -->
+      <div class="case-card" onclick="toggleCase(this)">
+        <div class="case-header">
+          <div>
+            <div class="case-header-left">
+              <span class="case-tag">Arts &amp; Culture · Strategic Research</span>
+              <h3 class="case-client">Nonprofit Arts Organization</h3>
+            </div>
+            <p class="case-title-preview">Community visioning and strategic research for a contemporary arts organization planning its next chapter</p>
+          </div>
+          <div class="case-expand-indicator">
+            <span>View project</span>
+            <span class="expand-icon"></span>
+          </div>
+        </div>
+        <div class="case-detail">
+          <div class="case-detail-inner">
+            <div class="case-detail-content">
+              <div>
+                <p class="case-body">As the organization ended a three-year strategic plan and gained approval to develop a new facility, the central question was: what do the people who make up this community actually believe this organization is — and what do they want it to become? Research spanned 412 survey responses across five stakeholder groups, artist workshops, and 8 community partner interviews. Findings were synthesized into affinity maps and a community sentiment evaluation, then brought into a one-day visioning workshop with staff and the steering committee. The work directly shaped a board-approved three-year strategic plan.</p>
+                <p class="case-body" style="font-style: italic; opacity: 0.75; margin-top: 1rem;">Each method surfaced something different: surveys captured scale and sentiment, interviews surfaced nuance, and workshops generated ideas that neither could on their own. What I'd do differently: build in a more structured way to triangulate across methods earlier in synthesis, rather than treating each source separately before bringing them together.</p>
+              </div>
+              <div class="case-meta">
+                <div class="meta-row">
+                  <span class="meta-key">Methods</span>
+                  <span class="meta-val">Surveys (n=412), stakeholder interviews, artist workshops, affinity mapping, facilitated visioning</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-key">Deliverable</span>
+                  <span class="meta-val">Research outcomes summary, community sentiment evaluation, three-year strategic plan</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-key">My role</span>
+                  <span class="meta-val">Researcher, synthesist, workshop co-facilitator</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 2: Enterprise Ops -->
+      <div class="case-card" onclick="toggleCase(this)">
+        <div class="case-header">
+          <div>
+            <div class="case-header-left">
+              <span class="case-tag">Operations · Systems Design</span>
+              <h3 class="case-client">Commercial Client</h3>
+            </div>
+            <p class="case-title-preview">Enterprise operations design for a rapidly scaling firm with manual, unsustainable workflows</p>
+          </div>
+          <div class="case-expand-indicator">
+            <span>View project</span>
+            <span class="expand-icon"></span>
+          </div>
+        </div>
+        <div class="case-detail">
+          <div class="case-detail-inner">
+            <div class="case-detail-content">
+              <div>
+                <p class="case-body">Document approvals required 3–7 email exchanges. Processes built for a two-person team were breaking under organizational growth. Discovery interviews and process walkthroughs across three departments surfaced the friction points — and informed a system architecture built to scale. For each department, I produced a system architecture recommendation, user permissions matrix, and workflow guide. After building out the platform, I returned for structured review sessions and iterated before finalizing. The result: from 2 users to 30+ daily active users across three departments, a client-funded platform upgrade, and an engagement expanded to two additional departments now heading toward enterprise-wide rollout.</p>
+                <p class="case-body" style="font-style: italic; opacity: 0.75; margin-top: 1rem;">Working across three departments with very different functions made it clear how much context shapes process needs. What I'd do differently: conduct a cross-functional alignment session earlier to surface shared pain points and vocabulary before designing department-specific solutions — it would have reduced iteration time and strengthened adoption.</p>
+              </div>
+              <div class="case-meta">
+                <div class="meta-row">
+                  <span class="meta-key">Methods</span>
+                  <span class="meta-val">Stakeholder interviews, process walkthroughs, landscape research, iterative design</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-key">Deliverable</span>
+                  <span class="meta-val">System architecture docs, permissions matrix, workflow guides, built platform</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-key">My role</span>
+                  <span class="meta-val">Researcher, systems designer, platform builder</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 3: HR Process Mapping -->
+      <div class="case-card" onclick="toggleCase(this)">
+        <div class="case-header">
+          <div>
+            <div class="case-header-left">
+              <span class="case-tag">Construction · HR Research</span>
+              <h3 class="case-client">Construction Industry Client</h3>
+            </div>
+            <p class="case-title-preview">HR process research and redesign across case management, recruiting, and onboarding</p>
+          </div>
+          <div class="case-expand-indicator">
+            <span>View project</span>
+            <span class="expand-icon"></span>
+          </div>
+        </div>
+        <div class="case-detail">
+          <div class="case-detail-inner">
+            <div class="case-detail-content">
+              <div>
+                <p class="case-body">An industry-leading contractor needed to document and improve three core HR processes — each branching into sub-processes across professional staff, field staff, and craft employees. I designed interview guides and independently conducted 25+ semi-structured interviews across roles and levels, then translated findings into swimlane process maps for all three processes. Industry benchmarking provided external context. Research surfaced high-impact structural and systemic opportunities across all three process maps, with direct implications for operational efficiency, consistency, and employee experience.</p>
+                <p class="case-body" style="font-style: italic; opacity: 0.75; margin-top: 1rem;">Conducting 25+ interviews across a highly differentiated workforce sharpened my ability to adapt interview style without compromising consistency. The most valuable skill I developed was learning to hold complexity: mapping processes that branch and sub-branch without losing sight of the human experience at each node. What I'd do differently: involve frontline employees earlier in validating process maps before finalizing, rather than relying solely on leadership review.</p>
+              </div>
+              <div class="case-meta">
+                <div class="meta-row">
+                  <span class="meta-key">Methods</span>
+                  <span class="meta-val">Semi-structured interviews (25+), process mapping, industry benchmarking</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-key">Deliverable</span>
+                  <span class="meta-val">Swimlane process maps, recommendations report, leadership presentation</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-key">My role</span>
+                  <span class="meta-val">Lead researcher, process mapper, presenter</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    function toggleCase(card) {
+      const isOpen = card.classList.contains('open');
+      document.querySelectorAll('.case-card.open').forEach(c => c.classList.remove('open'));
+      if (!isOpen) card.classList.add('open');
+    }
+  </script>
+
+  <hr class="full-divider" />
+
+  <!-- METHODS -->
+  <section class="section methods-section" id="methods">
+    <p class="section-label">Methods &amp; Skills</p>
+    <div class="methods-grid">
+      <div>
+        <p class="method-group-label">Research Methods</p>
+        <ul class="method-list">
+          <li>Stakeholder interviews (structured &amp; semi-structured)</li>
+          <li>Contextual inquiry</li>
+          <li>Workshop facilitation</li>
+          <li>Affinity mapping &amp; synthesis</li>
+          <li>Journey mapping</li>
+          <li>Survey design</li>
+          <li>Usability testing</li>
+        </ul>
+      </div>
+      <div>
+        <p class="method-group-label">Strategy &amp; Design</p>
+        <ul class="method-list">
+          <li>Human-centered design</li>
+          <li>Process mapping</li>
+          <li>Systems thinking</li>
+          <li>Strategic planning facilitation</li>
+          <li>Service design</li>
+          <li>Information architecture</li>
+        </ul>
+      </div>
+      <div>
+        <p class="method-group-label">Tools</p>
+        <ul class="method-list">
+          <li>Figma</li>
+          <li>Miro</li>
+          <li>Monday.com</li>
+          <li>Notion</li>
+          <li>Microsoft Office Suite</li>
+          <li>PowerPoint / slide storytelling</li>
+        </ul>
+      </div>
+      <div>
+        <p class="method-group-label">Domain Knowledge</p>
+        <ul class="method-list">
+          <li>Healthcare systems &amp; operations</li>
+          <li>Arts &amp; cultural institutions</li>
+          <li>Nonprofit strategy</li>
+          <li>Real estate &amp; facilities management</li>
+          <li>Construction program management</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="full-divider" />
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Hannah Blum</p>
+    <p>Chicago, IL</p>
+  </footer>
+
+</body>
+</html>
